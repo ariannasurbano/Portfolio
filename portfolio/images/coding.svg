@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Coding illustration</title>
+  <desc id="desc">A coding window with angle brackets and glowing lines.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1b2e42"/>
+      <stop offset="100%" stop-color="#0b1320"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#27f5c8"/>
+      <stop offset="100%" stop-color="#2c8cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="28" fill="none"/>
+  <rect x="34" y="48" width="188" height="152" rx="20" fill="url(#panel)" stroke="url(#accent)" stroke-width="6"/>
+  <rect x="34" y="48" width="188" height="28" rx="20" fill="#112033" opacity="0.9"/>
+  <circle cx="58" cy="62" r="6" fill="#ff6f6f"/>
+  <circle cx="78" cy="62" r="6" fill="#ffd36f"/>
+  <circle cx="98" cy="62" r="6" fill="#67ef9e"/>
+  <path d="M100 100 72 128l28 28" fill="none" stroke="#27f5c8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M156 100l28 28-28 28" fill="none" stroke="#2c8cff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M118 162l20-68" stroke="#8cecff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M146 92h42M146 112h28M146 132h36" stroke="#9de8ff" stroke-width="6" stroke-linecap="round"/>
+</svg>
