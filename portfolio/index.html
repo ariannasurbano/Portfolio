@@ -101,7 +101,10 @@
           An Information Technology student from Laguna State Polytechnic University,
           passionate about backend development and building efficient systems that support great user experiences.
         </p>
-
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Contact Me</a>
+          <a class="btn btn-ghost" href="#projects">View Projects</a>
+        </div>
       </div>
       <aside class="hero-panel card professional-card">
         <div class="portrait-frame">
@@ -177,24 +180,24 @@
         <p class="eyebrow">Projects</p>
         <h2>Student projects with practical impact.</h2>
       </div>
-      <div class="projects-grid">
-        <article class="project card professional-card">
+      <div class="projects-carousel-shell">
+        <button class="projects-nav-btn" type="button" data-project-prev aria-label="View previous project">‹</button>
+        <div class="projects-carousel" data-project-carousel>
+          <div class="projects-track">
+            <article class="project card professional-card">
           <h3>Recipe App: LutoLoco</h3>
           <p>
             Luto Loco is a recipe-focused web app designed to make cooking more enjoyable for home chefs.
             It helps users discover recipes, save favorites, and follow easy step-by-step cooking instructions.
           </p>
           <p>
-            The app features a searchable recipe library with ingredient lists, preparation tips, and meal ideas.
-            The layout is built for mobile and desktop use, so people can quickly access recipes while they cook.
+            The app features a searchable recipe library with ingredient lists, preparation tips, and meal ideas,
+            while the layout is built for mobile and desktop use so people can quickly access recipes while they cook.
           </p>
           <p>
             It also supports a favorites section, quick filtering by cuisine or ingredient, and easy-to-read instructions
-            to help anyone prepare meals confidently, even when they are learning new dishes.
-          </p>
-          <p>
-            The design prioritizes clarity and speed, allowing users to jump into a recipe without having to scroll through
-            cluttered pages. Luto Loco is ideal for everyday meal planning and food exploration.
+            that help anyone prepare meals confidently. The overall design prioritizes clarity and speed so users can
+            jump into a recipe without getting lost in cluttered pages.
           </p>
           <div class="project-slider" data-slider>
             <div class="slider-track">
@@ -282,6 +285,38 @@
           </div>
         </article>
         <article class="project card professional-card">
+          <h3>Health Monitoring Dashboard</h3>
+          <p>
+            Health Monitoring is a web-based dashboard concept focused on presenting health information in a clear
+            and practical way. It highlights a structured layout for tracking wellness-related data and progress over time.
+          </p>
+          <p>
+            The project emphasizes organized presentation and user-friendly navigation, making it easier to review
+            important health insights at a glance. It is designed to support a simple monitoring experience for
+            personal wellness or a healthcare-oriented workflow.
+          </p>
+          <p>
+            This concept combines a polished interface with thoughtful information hierarchy, helping users quickly find
+            the details that matter most in a health monitoring system.
+          </p>
+          <div class="project-slider" data-slider>
+            <div class="slider-track">
+              <div class="slide">
+               <img src="images/health.png" alt="Health monitoring dashboard overview" />
+              </div>
+              <div class="slide">
+               <img src="images/health 1.png" alt="Health monitoring screen" />
+              </div>
+              <div class="slide">
+               <img src="images/health 2.png" alt="Health monitoring analytics view" />
+              </div>
+            </div>
+          </div>
+          <div class="chip-row">
+            <span>Health</span><span>Dashboard</span><span>Monitoring</span><span>UI</span>
+          </div>
+        </article>
+        <article class="project card professional-card">
           <h3>Stravo Mens Apparel — E-commerce for Men's Fashion</h3>
           <p>
             Stravo Mens Apparel is an e-commerce prototype built to showcase a masculine fashion brand online.
@@ -304,10 +339,10 @@
                <img src="images/stravo 1.webp" alt="Stravo home catalog" />
               </div>
               <div class="slide">
-               <img src="images/stravo.webp" alt="Stravo product page" />
+               <img src="images/stravo.jpg" alt="Stravo product page" />
               </div>
               <div class="slide">
-               <img src="images/stravo 2.webp" alt="Stravo cart checkout" />
+               <img src="images/stravo 2.jpg" alt="Stravo cart checkout" />
               </div>
             </div>
           </div>
@@ -315,7 +350,11 @@
             <span>e-commerce</span><span>UI/UX</span><span>Inventory</span><span>Payments</span>
           </div>
         </article>
+          </div>
+        </div>
+        <button class="projects-nav-btn" type="button" data-project-next aria-label="View next project">›</button>
       </div>
+      <div class="projects-dots" data-project-dots></div>
     </section>
 
     <section class="section reveal" id="skills">
