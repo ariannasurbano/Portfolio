@@ -1339,6 +1339,34 @@ main {
     --card-padding: 1rem;
   }
 
+  .projects-carousel {
+    padding: 0 44px;
+  }
+
+  .projects-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+
+  .project {
+    min-height: auto;
+    padding-bottom: 1rem;
+  }
+
+  .project h3 {
+    min-height: auto;
+    font-size: 1.12rem;
+  }
+
+  .project > p {
+    flex: none;
+  }
+
+  .project-slider {
+    margin-top: 0.8rem;
+  }
+
   body {
     line-height: 1.6;
   }
@@ -1461,6 +1489,47 @@ main {
   main,
   .site-footer {
     width: min(1140px, calc(100% - 0.75rem));
+  }
+
+  .projects-carousel {
+    padding: 0 36px;
+  }
+
+  .projects-nav-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 1.05rem;
+  }
+
+  [data-project-prev] {
+    left: 4px;
+  }
+
+  [data-project-next] {
+    right: 4px;
+  }
+
+  .project {
+    min-height: auto;
+    padding: 0.95rem;
+  }
+
+  .project h3 {
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  .project p {
+    font-size: 0.95rem;
+  }
+
+  .chip-row {
+    gap: 6px;
+  }
+
+  .chip-row span {
+    font-size: 0.8rem;
+    padding: 3px 8px;
   }
 
   .site-nav {
