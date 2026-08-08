@@ -85,6 +85,72 @@ if (siteHeader) {
   window.addEventListener('scroll', updateSideNav, { passive: true });
   window.addEventListener('resize', updateSideNav);
   updateSideNav();
+
+  // --- Drag-to-move support for small devices ---
+  const dragState = {
+    active: false,
+    startX: 0,
+    startY: 0,
+    startTop: 0,
+    startRight: 0,
+    width: 0,
+    height: 0,
+  };
+
+  const onPointerDown = (e) => {
+    if (!siteHeader.classList.contains('side-nav')) return;
+    if (!smallScreen.matches) return;
+    // don't start drag when interacting with links or buttons
+    if (e.target.closest('a, button')) return;
+
+    const rect = siteHeader.getBoundingClientRect();
+    dragState.active = true;
+    dragState.startX = e.clientX;
+    dragState.startY = e.clientY;
+    dragState.startTop = rect.top;
+    dragState.startRight = window.innerWidth - rect.right;
+    dragState.width = rect.width;
+    dragState.height = rect.height;
+
+    siteHeader.style.transition = 'none';
+    try { siteHeader.setPointerCapture(e.pointerId); } catch (err) {}
+  };
+
+  const onPointerMove = (e) => {
+    if (!dragState.active) return;
+    const dx = e.clientX - dragState.startX;
+    const dy = e.clientY - dragState.startY;
+
+    let newTop = dragState.startTop + dy;
+    let newRight = dragState.startRight - dx;
+
+    // clamp inside viewport with small padding
+    const minTop = 8;
+    const maxTop = window.innerHeight - dragState.height - 8;
+    const minRight = 8;
+    const maxRight = window.innerWidth - dragState.width - 8;
+
+    if (newTop < minTop) newTop = minTop;
+    if (newTop > maxTop) newTop = maxTop;
+    if (newRight < minRight) newRight = minRight;
+    if (newRight > maxRight) newRight = maxRight;
+
+    siteHeader.style.top = `${Math.round(newTop)}px`;
+    siteHeader.style.right = `${Math.round(newRight)}px`;
+    siteHeader.style.left = 'auto';
+  };
+
+  const onPointerUp = (e) => {
+    if (!dragState.active) return;
+    dragState.active = false;
+    siteHeader.style.transition = 'top 0.15s ease, right 0.15s ease';
+    try { siteHeader.releasePointerCapture(e.pointerId); } catch (err) {}
+  };
+
+  siteHeader.addEventListener('pointerdown', onPointerDown);
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
+  window.addEventListener('pointercancel', onPointerUp);
 }
 
 sliders.forEach((slider) => {
