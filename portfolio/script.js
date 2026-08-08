@@ -94,6 +94,8 @@ const projectDots = document.querySelector('[data-project-dots]');
 
 if (projectCarousel && projectTrack && projectCards.length > 1) {
   let currentProjectIndex = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
 
   const updateProjectCarousel = () => {
     projectTrack.style.transform = `translateX(-${currentProjectIndex * 100}%)`;
@@ -127,6 +129,27 @@ if (projectCarousel && projectTrack && projectCards.length > 1) {
     currentProjectIndex = (currentProjectIndex + 1) % projectCards.length;
     updateProjectCarousel();
   });
+
+  projectCarousel.addEventListener('touchstart', (event) => {
+    touchStartX = event.touches[0].clientX;
+  }, { passive: true });
+
+  projectCarousel.addEventListener('touchend', (event) => {
+    touchEndX = event.changedTouches[0].clientX;
+    const distance = touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 50) {
+      return;
+    }
+
+    if (distance < 0) {
+      currentProjectIndex = (currentProjectIndex + 1) % projectCards.length;
+    } else {
+      currentProjectIndex = (currentProjectIndex - 1 + projectCards.length) % projectCards.length;
+    }
+
+    updateProjectCarousel();
+  }, { passive: true });
 
   updateProjectCarousel();
 }
