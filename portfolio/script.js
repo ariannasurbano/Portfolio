@@ -84,3 +84,49 @@ sliders.forEach((slider) => {
     track.style.transform = `translateX(-${index * 100}%)`;
   }, 3500);
 });
+
+const projectCarousel = document.querySelector('[data-project-carousel]');
+const projectTrack = projectCarousel?.querySelector('.projects-track');
+const projectCards = projectTrack ? Array.from(projectTrack.children) : [];
+const projectPrevButton = document.querySelector('[data-project-prev]');
+const projectNextButton = document.querySelector('[data-project-next]');
+const projectDots = document.querySelector('[data-project-dots]');
+
+if (projectCarousel && projectTrack && projectCards.length > 1) {
+  let currentProjectIndex = 0;
+
+  const updateProjectCarousel = () => {
+    projectTrack.style.transform = `translateX(-${currentProjectIndex * 100}%)`;
+
+    projectCards.forEach((card, index) => {
+      card.classList.toggle('is-active', index === currentProjectIndex);
+    });
+
+    projectDots?.querySelectorAll('button').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentProjectIndex);
+    });
+  };
+
+  projectCards.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Go to project ${index + 1}`);
+    dot.addEventListener('click', () => {
+      currentProjectIndex = index;
+      updateProjectCarousel();
+    });
+    projectDots?.appendChild(dot);
+  });
+
+  projectPrevButton?.addEventListener('click', () => {
+    currentProjectIndex = (currentProjectIndex - 1 + projectCards.length) % projectCards.length;
+    updateProjectCarousel();
+  });
+
+  projectNextButton?.addEventListener('click', () => {
+    currentProjectIndex = (currentProjectIndex + 1) % projectCards.length;
+    updateProjectCarousel();
+  });
+
+  updateProjectCarousel();
+}
