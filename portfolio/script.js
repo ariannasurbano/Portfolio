@@ -95,13 +95,15 @@ if (siteHeader) {
     startRight: 0,
     width: 0,
     height: 0,
+    moved: false,
   };
 
   const onPointerDown = (e) => {
     if (!siteHeader.classList.contains('side-nav')) return;
     if (!smallScreen.matches) return;
-    // don't start drag when interacting with links or buttons
-    if (e.target.closest('a, button')) return;
+    // don't start drag when interacting with links; allow starting from the toggle
+    if (e.target.closest('a')) return;
+    if (e.target.closest('button') && !e.target.closest('.side-nav-toggle')) return;
 
     const rect = siteHeader.getBoundingClientRect();
     dragState.active = true;
@@ -111,6 +113,7 @@ if (siteHeader) {
     dragState.startRight = window.innerWidth - rect.right;
     dragState.width = rect.width;
     dragState.height = rect.height;
+    dragState.moved = false;
 
     siteHeader.style.transition = 'none';
     try { siteHeader.setPointerCapture(e.pointerId); } catch (err) {}
@@ -120,6 +123,10 @@ if (siteHeader) {
     if (!dragState.active) return;
     const dx = e.clientX - dragState.startX;
     const dy = e.clientY - dragState.startY;
+
+    if (!dragState.moved && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      dragState.moved = true;
+    }
 
     let newTop = dragState.startTop + dy;
     let newRight = dragState.startRight - dx;
@@ -145,12 +152,23 @@ if (siteHeader) {
     dragState.active = false;
     siteHeader.style.transition = 'top 0.15s ease, right 0.15s ease';
     try { siteHeader.releasePointerCapture(e.pointerId); } catch (err) {}
+    // reset moved flag shortly after release to allow the next click normally
+    window.setTimeout(() => { dragState.moved = false; }, 50);
   };
 
   siteHeader.addEventListener('pointerdown', onPointerDown);
   window.addEventListener('pointermove', onPointerMove);
   window.addEventListener('pointerup', onPointerUp);
   window.addEventListener('pointercancel', onPointerUp);
+
+  // Prevent the toggle's click action if the user was dragging (started on the toggle)
+  sideNavToggle?.addEventListener('click', (e) => {
+    if (dragState.moved) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      dragState.moved = false;
+    }
+  }, true);
 }
 
 sliders.forEach((slider) => {
