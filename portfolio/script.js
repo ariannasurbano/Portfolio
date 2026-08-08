@@ -1,4 +1,5 @@
 const siteHeader = document.querySelector('.site-header');
+const sideNavToggle = document.querySelector('.side-nav-toggle');
 const siteNav = document.querySelector('.site-nav');
 const navLinks = document.querySelectorAll('.site-nav a');
 const revealItems = document.querySelectorAll('.reveal');
@@ -61,8 +62,25 @@ if (siteHeader) {
       siteHeader.classList.add('side-nav');
     } else {
       siteHeader.classList.remove('side-nav');
+      siteHeader.classList.remove('side-nav-collapsed');
+      if (sideNavToggle) {
+        sideNavToggle.setAttribute('aria-label', 'Hide side menu');
+        sideNavToggle.setAttribute('aria-expanded', 'true');
+      }
     }
   };
+
+  const toggleSideNav = () => {
+    if (!siteHeader) return;
+
+    const collapsed = siteHeader.classList.toggle('side-nav-collapsed');
+    if (sideNavToggle) {
+      sideNavToggle.setAttribute('aria-label', collapsed ? 'Show side menu' : 'Hide side menu');
+      sideNavToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    }
+  };
+
+  sideNavToggle?.addEventListener('click', toggleSideNav);
 
   window.addEventListener('scroll', updateSideNav, { passive: true });
   window.addEventListener('resize', updateSideNav);
