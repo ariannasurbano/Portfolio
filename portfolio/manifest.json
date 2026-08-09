@@ -1,0 +1,39 @@
+{
+  "name": "Arianna C. Surbano | IT Student Portfolio",
+  "short_name": "Arianna's Portfolio",
+  "description": "Portfolio of Arianna C. Surbano, an IT student and first-time job seeker focused on backend development and practical software solutions.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#1a1a2e",
+  "background_color": "#0f0f23",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["business", "education"],
+  "screenshots": [
+    {
+      "src": "images/profile.jpg",
+      "sizes": "540x720",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    }
+  ]
+}
