@@ -255,3 +255,68 @@ if (projectCarousel && projectTrack && projectCards.length > 1) {
 
   updateProjectCarousel();
 }
+
+const certCarousel = document.querySelector('[data-cert-carousel]');
+const certTrack = certCarousel?.querySelector('.cert-track');
+const certSlides = certTrack ? Array.from(certTrack.children) : [];
+const certPrevButton = document.querySelector('[data-cert-prev]');
+const certNextButton = document.querySelector('[data-cert-next]');
+const certDots = document.querySelector('[data-cert-dots]');
+
+if (certCarousel && certTrack && certSlides.length > 1) {
+  let currentCertIndex = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  const updateCertCarousel = () => {
+    certTrack.style.transform = `translateX(-${currentCertIndex * 100}%)`;
+
+    certDots?.querySelectorAll('button').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentCertIndex);
+    });
+  };
+
+  certSlides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Go to certification slide ${index + 1}`);
+    dot.addEventListener('click', () => {
+      currentCertIndex = index;
+      updateCertCarousel();
+    });
+    certDots?.appendChild(dot);
+  });
+
+  certPrevButton?.addEventListener('click', () => {
+    currentCertIndex = (currentCertIndex - 1 + certSlides.length) % certSlides.length;
+    updateCertCarousel();
+  });
+
+  certNextButton?.addEventListener('click', () => {
+    currentCertIndex = (currentCertIndex + 1) % certSlides.length;
+    updateCertCarousel();
+  });
+
+  certCarousel.addEventListener('touchstart', (event) => {
+    touchStartX = event.touches[0].clientX;
+  }, { passive: true });
+
+  certCarousel.addEventListener('touchend', (event) => {
+    touchEndX = event.changedTouches[0].clientX;
+    const distance = touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 50) {
+      return;
+    }
+
+    if (distance < 0) {
+      currentCertIndex = (currentCertIndex + 1) % certSlides.length;
+    } else {
+      currentCertIndex = (currentCertIndex - 1 + certSlides.length) % certSlides.length;
+    }
+
+    updateCertCarousel();
+  }, { passive: true });
+
+  updateCertCarousel();
+}
