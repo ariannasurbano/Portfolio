@@ -1307,7 +1307,8 @@ main {
 }
 
 .cert-slide {
-  min-width: 100%;
+  flex: 0 0 33.333333%;
+  min-width: 33.333333%;
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
@@ -1343,9 +1344,45 @@ main {
   flex-direction: column;
   gap: 12px;
   min-height: 100%;
-  background: linear-gradient(180deg, rgba(31, 13, 31, 0.92), rgba(20, 8, 22, 0.98));
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 111, 177, 0.2), transparent 34%), linear-gradient(180deg, rgba(31, 13, 31, 0.92), rgba(20, 8, 22, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.cert-card:hover,
+.cert-card:focus-within,
+.cert-card:active {
+  transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-8px) scale(1.015);
+  border-color: rgba(255, 184, 224, 0.62);
+  background: linear-gradient(180deg, rgba(48, 17, 47, 0.98), rgba(28, 9, 31, 0.98));
+  box-shadow: 0 34px 76px rgba(10, 4, 15, 0.48), 0 0 0 2px rgba(255, 111, 177, 0.2), 0 0 34px rgba(184, 107, 255, 0.22);
+}
+
+.cert-card::before {
+  display: none;
+}
+
+.cert-card::after {
+  display: none;
+}
+
+.cert-card .cert-meta {
+  transition: transform 0.25s ease;
+}
+
+.cert-card:hover .cert-meta,
+.cert-card:focus-within .cert-meta,
+.cert-card:active .cert-meta {
+  transform: translateZ(18px) translateX(3px);
+}
+
+.cert-card:hover .cert-image,
+.cert-card:focus-within .cert-image,
+.cert-card:active .cert-image {
+  transform: scale(1.035);
+  box-shadow: 0 0 0 2px rgba(255, 184, 224, 0.28), 0 16px 30px rgba(255, 111, 177, 0.2);
 }
 
 .cert-card a,
@@ -1382,13 +1419,19 @@ main {
   object-fit: contain;
   border-radius: 12px;
   background: linear-gradient(180deg, rgba(24, 10, 22, 0.9), rgba(36, 16, 38, 1));
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
 }
 
 .cert-card a:hover .cert-image,
 .cert-card a:focus-visible .cert-image {
   transform: scale(1.02);
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.26);
+}
+
+.cert-card:hover .cert-image,
+.cert-card:focus-within .cert-image,
+.cert-card:active .cert-image {
+  filter: saturate(1.12) contrast(1.04);
 }
 
 .cert-card h3 {
@@ -1459,6 +1502,8 @@ main {
   }
 
   .cert-slide {
+    flex-basis: 50%;
+    min-width: 50%;
     gap: 12px;
   }
 
@@ -1480,6 +1525,8 @@ main {
   }
 
   .cert-slide {
+    flex-basis: 100%;
+    min-width: 100%;
     grid-template-columns: 1fr;
     gap: 10px;
     padding: 4px 0;

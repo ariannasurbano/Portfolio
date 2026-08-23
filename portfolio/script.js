@@ -19,11 +19,20 @@ cards.forEach((card) => {
 
     card.style.setProperty('--mouse-x', `${x}%`);
     card.style.setProperty('--mouse-y', `${y}%`);
+
+    if (card.classList.contains('cert-card') && event.pointerType !== 'touch') {
+      const tiltX = ((x - 50) / 50) * 3;
+      const tiltY = ((50 - y) / 50) * 3;
+      card.style.setProperty('--tilt-x', `${tiltX.toFixed(2)}deg`);
+      card.style.setProperty('--tilt-y', `${tiltY.toFixed(2)}deg`);
+    }
   });
 
   card.addEventListener('pointerleave', () => {
     card.style.setProperty('--mouse-x', '50%');
     card.style.setProperty('--mouse-y', '50%');
+    card.style.setProperty('--tilt-x', '0deg');
+    card.style.setProperty('--tilt-y', '0deg');
   });
 });
 
@@ -264,36 +273,68 @@ const certNextButton = document.querySelector('[data-cert-next]');
 const certDots = document.querySelector('[data-cert-dots]');
 
 if (certCarousel && certTrack && certSlides.length > 1) {
-  let currentCertIndex = 0;
+  let currentCertPage = 0;
   let touchStartX = 0;
   let touchEndX = 0;
 
-  const updateCertCarousel = () => {
-    certTrack.style.transform = `translateX(-${currentCertIndex * 100}%)`;
+  const getVisibleCertCount = () => {
+    if (window.matchMedia('(max-width: 760px)').matches) return 1;
+    if (window.matchMedia('(max-width: 980px)').matches) return 2;
+    return 3;
+  };
 
-    certDots?.querySelectorAll('button').forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentCertIndex);
+  const getPageStarts = () => {
+    const visibleCount = getVisibleCertCount();
+    const lastStart = Math.max(certSlides.length - visibleCount, 0);
+    const starts = [];
+
+    for (let start = 0; start < lastStart; start += visibleCount) {
+      starts.push(start);
+    }
+
+    starts.push(lastStart);
+    return [...new Set(starts)];
+  };
+
+  const renderCertDots = (pageStarts) => {
+    if (!certDots) return;
+
+    certDots.replaceChildren();
+    pageStarts.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Go to certification page ${index + 1}`);
+      dot.addEventListener('click', () => {
+        currentCertPage = index;
+        updateCertCarousel();
+      });
+      certDots.appendChild(dot);
     });
   };
 
-  certSlides.forEach((_, index) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.setAttribute('aria-label', `Go to certification slide ${index + 1}`);
-    dot.addEventListener('click', () => {
-      currentCertIndex = index;
-      updateCertCarousel();
+  const updateCertCarousel = () => {
+    const pageStarts = getPageStarts();
+    currentCertPage = Math.min(currentCertPage, pageStarts.length - 1);
+    const start = pageStarts[currentCertPage];
+    const visibleCount = getVisibleCertCount();
+
+    renderCertDots(pageStarts);
+    const cardWidth = certCarousel.clientWidth / visibleCount;
+    certTrack.style.transform = `translateX(-${start * cardWidth}px)`;
+
+    certDots?.querySelectorAll('button').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentCertPage);
     });
-    certDots?.appendChild(dot);
-  });
+  };
 
   certPrevButton?.addEventListener('click', () => {
-    currentCertIndex = (currentCertIndex - 1 + certSlides.length) % certSlides.length;
+    const pageCount = getPageStarts().length;
+    currentCertPage = (currentCertPage - 1 + pageCount) % pageCount;
     updateCertCarousel();
   });
 
   certNextButton?.addEventListener('click', () => {
-    currentCertIndex = (currentCertIndex + 1) % certSlides.length;
+    currentCertPage = (currentCertPage + 1) % getPageStarts().length;
     updateCertCarousel();
   });
 
@@ -318,5 +359,6 @@ if (certCarousel && certTrack && certSlides.length > 1) {
     updateCertCarousel();
   }, { passive: true });
 
+  window.addEventListener('resize', updateCertCarousel);
   updateCertCarousel();
 }
