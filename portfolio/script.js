@@ -277,14 +277,30 @@ document.addEventListener('DOMContentLoaded', () => {
   sliders.forEach((slider) => {
     const track = slider.querySelector('.slider-track');
     const slides = slider.querySelectorAll('.slide');
-    const prevBtn = slider.querySelector('.slider-prev');
-    const nextBtn = slider.querySelector('.slider-next');
+    const images = Array.from(slider.querySelectorAll('.slide img'));
     const dotsContainer = slider.querySelector('.slider-dots');
 
     if (!track || slides.length < 2) return;
 
     let currentIndex = 0;
     let autoInterval = null;
+    const projectTitle = slider.closest('.project-carousel-card')?.querySelector('.project-title')?.textContent.trim() || 'Project Preview';
+    const galleryImages = images.map((image) => image.getAttribute('src')).filter(Boolean);
+
+    images.forEach((image, index) => {
+      image.setAttribute('role', 'button');
+      image.setAttribute('aria-label', `View full-size image: ${image.alt}`);
+      image.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
+      image.setAttribute('data-lightbox', galleryImages.join(','));
+      image.setAttribute('data-title', projectTitle);
+      image.setAttribute('data-lightbox-index', String(index));
+      image.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          image.click();
+        }
+      });
+    });
 
     if (dotsContainer) {
       dotsContainer.innerHTML = '';
@@ -303,6 +319,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateSlider = () => {
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      images.forEach((image, index) => {
+        image.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
+      });
       if (dotsContainer) {
         const dots = dotsContainer.querySelectorAll('button');
         dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
@@ -313,16 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
       currentIndex = (index + slides.length) % slides.length;
       updateSlider();
     };
-
-    prevBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      goToSlide(currentIndex - 1);
-    });
-
-    nextBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      goToSlide(currentIndex + 1);
-    });
 
     // Touch swipe support on screenshot slider
     let touchStartX = 0;
@@ -354,6 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     slider.addEventListener('mouseenter', stopAutoPlay);
     slider.addEventListener('mouseleave', startAutoPlay);
+    updateSlider();
     startAutoPlay();
   });
 
@@ -614,7 +624,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = trigger.getAttribute('data-title') || 'Preview';
       if (!raw) return;
       const imagesList = raw.split(',').map((s) => s.trim()).filter(Boolean);
-      openLightbox(imagesList, title, 0);
+      const startIndex = Number.parseInt(trigger.getAttribute('data-lightbox-index') || '0', 10);
+      openLightbox(imagesList, title, Number.isInteger(startIndex) ? startIndex : 0);
     });
   });
 
@@ -710,10 +721,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 15. CONTACT FORM VALIDATION & SIMULATION ---
+  // --- 15. CONTACT FORM VALIDATION & SUBMISSION ---
   const contactForm = document.getElementById('contact-form');
   const charCounter = document.getElementById('char-counter');
   const messageInput = document.getElementById('contact-message');
+  const contactFormStatus = document.getElementById('contact-form-status');
 
   messageInput?.addEventListener('input', () => {
     const len = messageInput.value.length;
@@ -722,7 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  contactForm?.addEventListener('submit', (e) => {
+  contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const nameInput = document.getElementById('contact-name');
@@ -748,23 +760,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (hasError) {
+      if (contactFormStatus) contactFormStatus.textContent = 'Please complete the required fields with valid information.';
       showToast('Please check required fields', '⚠️');
       return;
     }
 
     const submitBtn = document.getElementById('submit-btn');
-    if (submitBtn) {
-      const origText = submitBtn.innerHTML;
+    if (submitBtn instanceof HTMLButtonElement) {
+      const originalButtonContent = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = `<span>Sending...</span>`;
+      if (contactFormStatus) contactFormStatus.textContent = 'Sending your message...';
 
-      setTimeout(() => {
-        showToast('Thank you! Message prepared and sent successfully.', '✉️');
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/ariannasurbano64@gmail.com', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(Object.fromEntries(new FormData(contactForm).entries()))
+        });
+        const result = await response.json();
+
+        if (!response.ok || result.success !== 'true') {
+          throw new Error(result.message || 'The email service could not accept your message.');
+        }
+
+        showToast('Your message was sent successfully.', '✉️');
+        if (contactFormStatus) {
+          contactFormStatus.textContent = 'Your message was submitted. Thank you for reaching out!';
+        }
         contactForm.reset();
         if (charCounter) charCounter.textContent = '0 / 500';
+      } catch (error) {
+        console.error('Contact form submission failed:', error);
+        const errorMessage = 'Your message could not be sent. Please try again or email ariannasurbano64@gmail.com directly.';
+        if (contactFormStatus) contactFormStatus.textContent = errorMessage;
+        showToast('Unable to send your message. Please try again.', '⚠️');
+      } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = origText;
-      }, 900);
+        submitBtn.innerHTML = originalButtonContent;
+      }
     }
   });
 
