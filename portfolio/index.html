@@ -1,547 +1,1468 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arianna C. Surbano | IT Student Portfolio</title>
-  <meta name="description" content="Portfolio of Arianna C. Surbano, an IT student and first-time job seeker focused on backend development and practical software solutions." />
+  <title>Arianna C. Surbano | IT Student Portfolio & Backend Developer</title>
+  <meta name="description" content="Portfolio of Arianna C. Surbano, BSIT Student at Laguna State Polytechnic University. Specializing in backend development, databases, and practical software solutions." />
+  
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/logo.png" />
   <link rel="apple-touch-icon" href="images/logo.png" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#1a1a2e" />
-  <!-- End Favicon -->
+  <meta name="theme-color" content="#120617" />
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="background-layer" aria-hidden="true">
-    <div class="orb orb-one"></div>
-    <div class="orb orb-two"></div>
-    <div class="orb orb-three"></div>
-    <div class="orb orb-four"></div>
-  </div>
+  <!-- Ambient Interactive Canvas Background -->
+  <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
+  <div class="background-mesh" aria-hidden="true"></div>
 
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- SITE NAVIGATION (Top Bar on Desktop / Smooth Side Dock on Scroll, Tablet & Mobile) -->
   <header class="site-header" id="top">
-    <button class="side-nav-toggle" type="button" aria-label="Hide side menu" aria-expanded="true">
+    <button class="side-nav-toggle" id="side-nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="true">
       <span class="side-nav-toggle__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="2" y1="12" x2="22" y2="12"></line>
           <path d="M12 2a15 15 0 0 0 0 20"></path>
         </svg>
       </span>
     </button>
-    <nav id="site-nav" class="site-nav">
-      <a href="#profile">
+    <nav id="site-nav" class="site-nav" aria-label="Main Navigation">
+      <a href="#profile" class="nav-link active">
         <span class="nav-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 12l9-9 9 9" />
-            <path d="M9 21V9h6v12" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12l9-9 9 9"></path>
+            <path d="M9 21V9h6v12"></path>
           </svg>
         </span>
         <span class="nav-label">Home</span>
       </a>
-      <a href="#about">
+      <a href="#about" class="nav-link">
         <span class="nav-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3 3 8l9 5 9-5-9-5Z" />
-            <path d="M3 12l9 5 9-5" />
-            <path d="M3 16l9 5 9-5" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
           </svg>
-        </span>                                                                                 
+        </span>
         <span class="nav-label">About</span>
       </a>
-      <a href="#projects">
+      <a href="#projects" class="nav-link">
         <span class="nav-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 7h16" />
-            <path d="M6 5v4" />
-            <path d="M18 5v4" />
-            <rect x="4" y="7" width="16" height="12" rx="2" />
-            <path d="M9 13h6" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
           </svg>
         </span>
         <span class="nav-label">Projects</span>
       </a>
-      <a href="#skills">
+      <a href="#skills" class="nav-link">
         <span class="nav-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2 15 9l7 .6-5.2 4.6L18.4 21 12 16.9 5.6 21l1.6-6.8L2 9.6 9 9l3-7Z" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
         </span>
         <span class="nav-label">Skills</span>
       </a>
-      <a href="#education">
+      <a href="#education" class="nav-link">
         <span class="nav-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 8.5 12 4l10 4.5-10 4.5-10-4.5Z" />
-            <path d="M6 10.2V15c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.8" />
-            <path d="M22 9.5v6" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
           </svg>
         </span>
         <span class="nav-label">Education</span>
       </a>
-      <a href="#certifications">
+      <a href="#certifications" class="nav-link">
         <span class="nav-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 3h10v12H7z" />
-            <path d="m12 15 2 6 1.5-3 3 .5-2-3.5" />
-            <path d="M9 7h6" />
-            <path d="M9 10h6" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="6"></circle>
+            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
           </svg>
         </span>
         <span class="nav-label">Certifications</span>
       </a>
-      <a href="#contact">
+      <a href="#contact" class="nav-link">
         <span class="nav-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="5" width="18" height="14" rx="2" />
-            <path d="m4 7 8 6 8-6" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
           </svg>
         </span>
         <span class="nav-label">Contact</span>
       </a>
+      <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle dark/light theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
+    <!-- HERO SECTION -->
     <section class="hero section reveal" id="profile">
-      <div class="hero-copy-shell">
-        <p class="eyebrow">First-Time Job Seeker • BSIT Student</p>
-        <h1>HELLO<br />I'M ARIANNA!</h1>
-        <p class="hero-copy">
-          An Information Technology student from Laguna State Polytechnic University,
-          passionate about backend development and building efficient systems that support great user experiences.
-        </p>
-      </div>
-      <aside class="hero-panel card professional-card">
-        <div class="portrait-frame">
-           <img src="images/profile.jpg" alt="Profile photo of Arianna C. Surbano" />
+      <div class="hero-content">
+
+        <h1 class="hero-title">
+          Hello, I'm <br />
+          <span class="gradient-text hero-name">Arianna C. Surbano</span>
+        </h1>
+
+        <!-- Interactive Typing Subtitle -->
+        <div class="typing-container">
+          <span class="typing-prefix">Passionate </span>
+          <span id="typing-text" class="typing-text">Backend Developer</span>
+          <span class="typing-cursor" aria-hidden="true">|</span>
         </div>
-        <h2>Quick Profile</h2>
-        <ul class="profile-list">
-          <li><strong>Name:</strong> Arianna C. Surbano</li>
-          <li><strong>Age:</strong> 22 years old</li>
-          <li><strong>Course:</strong> Bachelor of Science in Information Technology</li>
-          <li><strong>School:</strong> Laguna State Polytechnic University</li>
-          <li><strong>Location:</strong> Sta. Cruz, Laguna</li>
-        </ul>
-      </aside>
+
+        <p class="hero-copy">
+          A dedicated <strong>BSIT student at Laguna State Polytechnic University</strong> with a builder mindset.
+          I specialize in backend development, clean database systems, and practical web applications engineered
+          for reliability, seamless performance, and meaningful user impact.
+        </p>
+
+        <!-- Call to Action Buttons -->
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <span>View My Projects</span>
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <span>Contact Me</span>
+          </a>
+          <button id="resume-preview-btn" class="btn btn-ghost" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span>Quick Resume / Bio</span>
+          </button>
+        </div>
+
+        <!-- Interactive Metrics / Stats Bar -->
+        <div class="hero-stats" role="region" aria-label="Key Highlights and Statistics">
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-num" data-counter="5">5</span><span class="stat-plus">+</span>
+            </div>
+            <span class="stat-label">Showcase Projects</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-num" data-counter="7">7</span><span class="stat-plus">+</span>
+            </div>
+            <span class="stat-label">Certifications &amp; Badges</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-num stat-badge">BSIT</span>
+            </div>
+            <span class="stat-label">Senior Student</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-num" data-counter="100">100</span><span class="stat-plus">%</span>
+            </div>
+            <span class="stat-label">Drive to Learn</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual / 3D Tilt Profile Card -->
+      <div class="hero-visual">
+        <div class="profile-card 3d-tilt" id="hero-profile-card">
+          <div class="card-ambient-glow" aria-hidden="true"></div>
+          
+          <div class="portrait-container">
+            <div class="portrait-ring">
+              <img src="images/profile.jpg" alt="Arianna C. Surbano - Professional Profile" class="portrait-img" />
+            </div>
+          </div>
+
+          <div class="profile-details">
+            <h2 class="profile-name">Arianna C. Surbano</h2>
+            <p class="profile-subtitle">BSIT Candidate • Sta. Cruz, Laguna</p>
+            
+            <div class="profile-chips">
+              <span class="chip">Python</span>
+              <span class="chip">Java &amp; C#</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">Web Dev</span>
+            </div>
+
+            <ul class="profile-quick-facts">
+              <li>
+                <span class="fact-label">University:</span>
+                <span class="fact-val">Laguna State Polytechnic University</span>
+              </li>
+              <li>
+                <span class="fact-label">Degree:</span>
+                <span class="fact-val">BS in Information Technology</span>
+              </li>
+              <li>
+                <span class="fact-label">Focus:</span>
+                <span class="fact-val">Backend &amp; System Solutions</span>
+              </li>
+              <li>
+                <span class="fact-label">Location:</span>
+                <span class="fact-val">Sta. Cruz, Laguna, Philippines</span>
+              </li>
+            </ul>
+
+            <div class="profile-card-links">
+              <a href="https://github.com/ariannasurbano" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub Profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <a href="https://www.credly.com/users/surbano-arianna-c" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Credly Verified Badges">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+              </a>
+              <a href="mailto:ariannasurbano64@gmail.com" class="social-icon-btn" aria-label="Email Arianna">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="m4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </a>
+              <a href="tel:+639636518437" class="social-icon-btn" aria-label="Call Arianna">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-   
+    <!-- ABOUT SECTION -->
     <section class="section reveal" id="about">
       <div class="section-head">
-        <p class="eyebrow">About</p>
-        <h2>Backend-focused IT student with a builder mindset.</h2>
+        <span class="eyebrow">Discover My Story</span>
+        <h2>Backend-focused IT student with a builder's passion.</h2>
+        <p class="section-desc">
+          Building resilient systems, optimizing databases, and engineering software that performs flawlessly under the hood.
+        </p>
       </div>
-      <div class="about-layout">
-        <article class="card professional-card about-text">
+
+      <div class="about-grid">
+        <!-- Card 1: What Drives Me -->
+        <article class="glass-card about-card highlight-card">
+          <div class="card-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
           <h3>What Drives Me</h3>
           <p>
-            I have a deep passion for backend development, where I can build strong, efficient systems that power
-            great user experiences. I love solving complex problems behind the scenes and creating the foundation
-            that keeps applications running smoothly.
+            I have a genuine passion for backend architecture. While great user interfaces catch the eye,
+            it is the robust backend systems, well-structured databases, and fast query execution that keep
+            applications dependable and secure.
           </p>
-          <ul class="info-list">
-            <li>Course: Bachelor of Science in Information Technology</li>
-            <li>School: Laguna State Polytechnic University</li>
-            <li>Location: Sta. Cruz, Laguna</li>
-            <li>Passions: Web Development, Photo Editing, Coding</li>
+          <p>
+            I love tackling behind-the-scenes engineering challenges, ensuring that every transaction, record, and
+            user request runs seamlessly without data loss or performance bottlenecks.
+          </p>
+          <div class="tag-group">
+            <span class="badge">Architecture</span>
+            <span class="badge">Databases</span>
+            <span class="badge">Problem Solving</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Academic & Professional Goals -->
+        <article class="glass-card about-card">
+          <div class="card-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </div>
+          <h3>Academic Grounding</h3>
+          <p>
+            Currently pursuing my Bachelor of Science in Information Technology at
+            <strong>Laguna State Polytechnic University (LSPU)</strong>. My coursework and practical capstone projects
+            have given me hands-on training in object-oriented programming, relational databases, software lifecycle, and IT support.
+          </p>
+          <ul class="clean-list">
+            <li><strong>Degree:</strong> BS in Information Technology</li>
+            <li><strong>Campus:</strong> Laguna State Polytechnic University</li>
+            <li><strong>Location:</strong> Sta. Cruz, Laguna</li>
           </ul>
         </article>
-        <article class="card professional-card">
-          <h3>Personal Focus</h3>
+
+        <!-- Card 3: What I Bring to a Team -->
+        <article class="glass-card about-card">
+          <div class="card-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3>Collaborative &amp; Adaptable</h3>
           <p>
-            I am building my foundation in software development, web design, and system support while improving my
-            communication, collaboration, and problem-solving skills for my first professional role.
+            As a first-time job seeker and aspiring IT intern, I bring high enthusiasm, dependability, and a rapid ability
+            to learn new frameworks. Whether collaborating in cross-functional teams, diagnosing technical issues, or writing clean documentation,
+            I approach every project with diligence and accountability.
           </p>
+          <div class="tag-group">
+            <span class="badge">Team Collaboration</span>
+            <span class="badge">Clear Communication</span>
+            <span class="badge">Adaptability</span>
+          </div>
         </article>
       </div>
     </section>
 
+    <!-- PROJECTS SECTION -->
     <section class="section reveal" id="projects">
       <div class="section-head">
-        <p class="eyebrow">Projects</p>
-        <h2>Student projects with practical impact.</h2>
+        <span class="eyebrow">Portfolio Showcase</span>
+        <h2>Student projects with real-world practicality.</h2>
+        <p class="section-desc">
+          Interactive applications ranging from restaurant billing and internet cafe station monitoring to recipe platforms and e-commerce prototypes.
+        </p>
       </div>
-      <div class="projects-carousel-shell">
-        <button class="projects-nav-btn" type="button" data-project-prev aria-label="View previous project">‹</button>
-        <div class="projects-carousel" data-project-carousel>
-          <div class="projects-track">
-            <article class="project card professional-card">
-          <h3>Recipe App: LutoLoco</h3>
-          <p>
-            Luto Loco is a recipe-focused web app designed to make cooking more enjoyable for home chefs.
-            It helps users discover recipes, save favorites, and follow easy step-by-step cooking instructions.
-          </p>
-          <p>
-            The app features a searchable recipe library with ingredient lists, preparation tips, and meal ideas,
-            while the layout is built for mobile and desktop use so people can quickly access recipes while they cook.
-          </p>
-          <p>
-            It also supports a favorites section, quick filtering by cuisine or ingredient, and easy-to-read instructions
-            that help anyone prepare meals confidently. The overall design prioritizes clarity and speed so users can
-            jump into a recipe without getting lost in cluttered pages.
-          </p>
-          <div class="project-slider" data-slider>
-            <div class="slider-track">
-              <div class="slide">
-               <img src="images/luto.png" alt="LutoLoco screenshot 1" />
+
+      <!-- Projects Carousel Wrapper -->
+      <div class="carousel-wrapper projects-carousel-wrapper">
+        <button class="carousel-arrow carousel-prev" id="project-carousel-prev" type="button" aria-label="Previous Project" title="Previous Project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="carousel-viewport" id="project-carousel-viewport">
+          <div class="carousel-track projects-track" id="project-carousel-track">
+
+            <!-- PROJECT 1: LutoLoco -->
+            <article class="glass-card project-carousel-card" data-project-id="1">
+              <div class="project-media-shell">
+                <div class="project-slider" data-slider>
+                  <div class="slider-track">
+                    <div class="slide">
+                      <img src="images/luto.png" alt="LutoLoco recipe search and catalog" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/luto 1.png" alt="LutoLoco recipe instructions and ingredient view" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/luto 2.png" alt="LutoLoco favorite recipes collection" loading="lazy" />
+                    </div>
+                  </div>
+                  <button class="slider-nav slider-prev" type="button" aria-label="Previous image">‹</button>
+                  <button class="slider-nav slider-next" type="button" aria-label="Next image">›</button>
+                  <div class="slider-dots"></div>
+                </div>
+                <button class="zoom-btn" type="button" data-lightbox="images/luto.png,images/luto 1.png,images/luto 2.png" data-title="Recipe App: LutoLoco" title="Click to view full-size gallery">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>Enlarge</span>
+                </button>
               </div>
-              <div class="slide">
-               <img src="images/luto 1.png" alt="LutoLoco screenshot 2" />
+
+              <div class="project-body">
+                <div class="project-meta-top">
+                  <span class="category-pill web">Web Application</span>
+                  <span class="project-year">Python • Web</span>
+                </div>
+                <h3 class="project-title">Recipe App: LutoLoco</h3>
+                <p class="project-desc">
+                  LutoLoco is a recipe web app designed to make cooking easy and delightful for home chefs.
+                  Features a searchable database of Filipino and global recipes, categorized ingredients, cooking timers, and saved favorites.
+                </p>
+                <ul class="project-highlights">
+                  <li>Searchable recipe catalog with dietary and cuisine filters</li>
+                  <li>Favorites bookmarking system with instant recall</li>
+                  <li>Responsive layout optimized for tablets and mobile in the kitchen</li>
+                </ul>
+                <div class="chip-row">
+                  <span class="tech-chip">Python</span>
+                  <span class="tech-chip">HTML5</span>
+                  <span class="tech-chip">CSS3</span>
+                  <span class="tech-chip">Search Filter</span>
+                </div>
               </div>
-              <div class="slide">
-               <img src="images/luto 2.png" alt="LutoLoco screenshot 3" />
+            </article>
+
+            <!-- PROJECT 2: Corner 22 Billing System -->
+            <article class="glass-card project-carousel-card" data-project-id="2">
+              <div class="project-media-shell">
+                <div class="project-slider" data-slider>
+                  <div class="slider-track">
+                    <div class="slide">
+                      <img src="images/corner 2.png" alt="Corner 22 billing system order screen" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/corner 1.png" alt="Corner 22 payment and GCash checkout" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/corner.png" alt="Corner 22 sales records and receipts" loading="lazy" />
+                    </div>
+                  </div>
+                  <button class="slider-nav slider-prev" type="button" aria-label="Previous image">‹</button>
+                  <button class="slider-nav slider-next" type="button" aria-label="Next image">›</button>
+                  <div class="slider-dots"></div>
+                </div>
+                <button class="zoom-btn" type="button" data-lightbox="images/corner 2.png,images/corner 1.png,images/corner.png" data-title="Corner 22's Billing & POS System" title="Click to view full-size gallery">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>Enlarge</span>
+                </button>
               </div>
-            </div>
-          </div>
-          <div class="chip-row">
-            <span>Python</span><span>HTML</span><span>CSS</span>
-          </div>
-        </article>
-        <article class="project card professional-card">
-          <h3>Corner 22's Billing System</h3>
-          <p>
-            Corner 22's Billing System is a point-of-sale application created to handle dine-in and digital orders
-            for a small restaurant or cafe. It supports both cash transactions and GCash payments, making checkout
-            easier for staff and customers.
-          </p>
-          <p>
-            The system stores every transaction in a database, which helps reduce manual errors and keeps sales records
-            organized. It includes clear input fields for menu items, order quantities, and payment details so the team
-            can move quickly during busy periods.
-          </p>
-          <p>
-            This project emphasizes fast order handling, transparent receipt creation, and sales reporting. It aims to
-            improve daily operations by making order management more reliable and reducing the risk of lost or misplaced
-            transaction details.
-          </p>
-          <div class="project-slider" data-slider>
-            <div class="slider-track">
-              <div class="slide">
-               <img src="images/corner 2.png" alt="Corner 22 screenshot 1" />
+
+              <div class="project-body">
+                <div class="project-meta-top">
+                  <span class="category-pill systems">Point of Sale &amp; Systems</span>
+                  <span class="project-year">Python • Database</span>
+                </div>
+                <h3 class="project-title">Corner 22's Billing &amp; POS System</h3>
+                <p class="project-desc">
+                  A comprehensive point-of-sale and sales management system developed for a restaurant/cafe.
+                  Handles quick dine-in and takeout orders, supports cash payments and digital GCash validation, and logs all sales to a relational database.
+                </p>
+                <ul class="project-highlights">
+                  <li>Integrated Cash &amp; GCash payment workflows with automated change calculation</li>
+                  <li>Robust database recording eliminating lost paper receipts and calculation mistakes</li>
+                  <li>Sales summary dashboard and clear itemized receipt generation</li>
+                </ul>
+                <div class="chip-row">
+                  <span class="tech-chip">Python</span>
+                  <span class="tech-chip">JavaScript</span>
+                  <span class="tech-chip">HTML5 &amp; CSS3</span>
+                  <span class="tech-chip">MySQL / Database</span>
+                  <span class="tech-chip">GCash Integration</span>
+                </div>
               </div>
-              <div class="slide">
-               <img src="images/corner 1.png" alt="Corner 22 screenshot 2" />
+            </article>
+
+            <!-- PROJECT 3: Happy Net Cafe -->
+            <article class="glass-card project-carousel-card" data-project-id="3">
+              <div class="project-media-shell">
+                <div class="project-slider" data-slider>
+                  <div class="slider-track">
+                    <div class="slide">
+                      <img src="images/happy net.png" alt="Happy Net Cafe main station monitor overview" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/happy net 1.png" alt="Happy Net Cafe active PC timers" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/happy net 2.png" alt="Happy Net Cafe billing and session rates" loading="lazy" />
+                    </div>
+                  </div>
+                  <button class="slider-nav slider-prev" type="button" aria-label="Previous image">‹</button>
+                  <button class="slider-nav slider-next" type="button" aria-label="Next image">›</button>
+                  <div class="slider-dots"></div>
+                </div>
+                <button class="zoom-btn" type="button" data-lightbox="images/happy net.png,images/happy net 1.png,images/happy net 2.png" data-title="Happy Net Cafe — PC Monitoring & Management" title="Click to view full-size gallery">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>Enlarge</span>
+                </button>
               </div>
-              <div class="slide">
-               <img src="images/corner.png" alt="Corner 22 screenshot 3" />
+
+              <div class="project-body">
+                <div class="project-meta-top">
+                  <span class="category-pill systems">Management &amp; Monitoring</span>
+                  <span class="project-year">System Architecture</span>
+                </div>
+                <h3 class="project-title">Happy Net Cafe — PC Monitoring &amp; Management</h3>
+                <p class="project-desc">
+                  An administrative workstation monitoring and billing system built for internet cafe shops.
+                  Gives store attendants complete real-time visibility into computer seat availability, session countdown timers, and accurate revenue tracking.
+                </p>
+                <ul class="project-highlights">
+                  <li>Real-time seat status tracker (Available, Occupied, Reserved, Maintenance)</li>
+                  <li>Automated timer and billing calculation according to custom hourly rates</li>
+                  <li>Daily revenue summaries and customer session activity logs</li>
+                </ul>
+                <div class="chip-row">
+                  <span class="tech-chip">System Monitoring</span>
+                  <span class="tech-chip">Session Timers</span>
+                  <span class="tech-chip">Automated Billing</span>
+                  <span class="tech-chip">UI Dashboard</span>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="chip-row">
-            <span>Python</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
-          </div>
-        </article>
-        <article class="project card professional-card">
-          <h3>Happy Net Cafe — PC Monitoring & Management</h3>
-          <p>
-            Happy Net Cafe is a PC shop management project created to give owners full visibility of their computer
-            stations. It tracks active sessions, seat availability, and time usage so managers can quickly see which
-            computers are occupied.
-          </p>
-          <p>
-            The system includes session timers and billing summaries, making it easier to charge customers accurately
-            and avoid manual calculations. It also improves the customer experience by reducing wait times and
-            keeping the shop layout organized.
-          </p>
-          <p>
-            Designed with simplicity in mind, the app uses intuitive dashboards and clear monitoring screens. This helps
-            shop staff respond faster to new customers, track session changes, and generate daily reports for revenue
-            and usage patterns.
-          </p>
-          <div class="project-slider" data-slider>
-            <div class="slider-track">
-              <div class="slide">
-               <img src="images/happy net.png" alt="Happy Net Cafe dashboard" />
+            </article>
+
+            <!-- PROJECT 4: Health Monitoring Dashboard -->
+            <article class="glass-card project-carousel-card" data-project-id="4">
+              <div class="project-media-shell">
+                <div class="project-slider" data-slider>
+                  <div class="slider-track">
+                    <div class="slide">
+                      <img src="images/health.png" alt="Health monitoring overview dashboard" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/health 1.png" alt="Health metrics charts and vitals" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/health 2.png" alt="Health analytics and historical trends" loading="lazy" />
+                    </div>
+                  </div>
+                  <button class="slider-nav slider-prev" type="button" aria-label="Previous image">‹</button>
+                  <button class="slider-nav slider-next" type="button" aria-label="Next image">›</button>
+                  <div class="slider-dots"></div>
+                </div>
+                <button class="zoom-btn" type="button" data-lightbox="images/health.png,images/health 1.png,images/health 2.png" data-title="Health Monitoring Dashboard" title="Click to view full-size gallery">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>Enlarge</span>
+                </button>
               </div>
-              <div class="slide">
-               <img src="images/happy net 1.png" alt="Happy Net Cafe session monitor" />
+
+              <div class="project-body">
+                <div class="project-meta-top">
+                  <span class="category-pill ui">Dashboard &amp; Analytics</span>
+                  <span class="project-year">Healthcare UI</span>
+                </div>
+                <h3 class="project-title">Health Monitoring Dashboard</h3>
+                <p class="project-desc">
+                  A clinical and personal wellness dashboard designed to deliver clear, data-dense insights at a single glance.
+                  Focused on visual hierarchy, metric tracking, and intuitive user flows.
+                </p>
+                <ul class="project-highlights">
+                  <li>Structured visual summaries of vitals, history, and wellness milestones</li>
+                  <li>High-contrast status indicators for critical health thresholds</li>
+                  <li>Ergonomic dark theme tailored for clinical workflows</li>
+                </ul>
+                <div class="chip-row">
+                  <span class="tech-chip">UI / UX Design</span>
+                  <span class="tech-chip">Health Analytics</span>
+                  <span class="tech-chip">Data Visualization</span>
+                  <span class="tech-chip">Responsive Web</span>
+                </div>
               </div>
-              <div class="slide">
-               <img src="images/happy net 2.png" alt="Happy Net Cafe billing" />
+            </article>
+
+            <!-- PROJECT 5: Stravo Mens Apparel -->
+            <article class="glass-card project-carousel-card" data-project-id="5">
+              <div class="project-media-shell">
+                <div class="project-slider" data-slider>
+                  <div class="slider-track">
+                    <div class="slide">
+                      <img src="images/stravo 1.webp" alt="Stravo Men's Apparel catalog home" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/stravo.jpg" alt="Stravo product detail and sizing" loading="lazy" />
+                    </div>
+                    <div class="slide">
+                      <img src="images/stravo 2.jpg" alt="Stravo cart review and checkout modal" loading="lazy" />
+                    </div>
+                  </div>
+                  <button class="slider-nav slider-prev" type="button" aria-label="Previous image">‹</button>
+                  <button class="slider-nav slider-next" type="button" aria-label="Next image">›</button>
+                  <div class="slider-dots"></div>
+                </div>
+                <button class="zoom-btn" type="button" data-lightbox="images/stravo 1.webp,images/stravo.jpg,images/stravo 2.jpg" data-title="Stravo Mens Apparel — E-Commerce Prototype" title="Click to view full-size gallery">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>Enlarge</span>
+                </button>
               </div>
-            </div>
-          </div>
-          <div class="chip-row">
-            <span>UI</span><span>Session Tracking</span><span>Billing</span>
-          </div>
-        </article>
-        <article class="project card professional-card">
-          <h3>Health Monitoring Dashboard</h3>
-          <p>
-            Health Monitoring is a web-based dashboard concept focused on presenting health information in a clear
-            and practical way. It highlights a structured layout for tracking wellness-related data and progress over time.
-          </p>
-          <p>
-            The project emphasizes organized presentation and user-friendly navigation, making it easier to review
-            important health insights at a glance. It is designed to support a simple monitoring experience for
-            personal wellness or a healthcare-oriented workflow.
-          </p>
-          <p>
-            This concept combines a polished interface with thoughtful information hierarchy, helping users quickly find
-            the details that matter most in a health monitoring system.
-          </p>
-          <div class="project-slider" data-slider>
-            <div class="slider-track">
-              <div class="slide">
-               <img src="images/health.png" alt="Health monitoring dashboard overview" />
+
+              <div class="project-body">
+                <div class="project-meta-top">
+                  <span class="category-pill web">E-Commerce Platform</span>
+                  <span class="project-year">Web Store</span>
+                </div>
+                <h3 class="project-title">Stravo Mens Apparel — E-Commerce</h3>
+                <p class="project-desc">
+                  A modern online store prototype created for a masculine fashion brand.
+                  Includes product filtering by category and size, dynamic shopping cart calculation, inventory previews, and an intuitive checkout flow.
+                </p>
+                <ul class="project-highlights">
+                  <li>Category filtering and rapid product discovery catalog</li>
+                  <li>Interactive cart modal with dynamic order calculation and instant update</li>
+                  <li>Streamlined checkout prototype designed to minimize cart abandonment</li>
+                </ul>
+                <div class="chip-row">
+                  <span class="tech-chip">E-Commerce</span>
+                  <span class="tech-chip">UI / UX</span>
+                  <span class="tech-chip">Cart State</span>
+                  <span class="tech-chip">Inventory</span>
+                </div>
               </div>
-              <div class="slide">
-               <img src="images/health 1.png" alt="Health monitoring screen" />
-              </div>
-              <div class="slide">
-               <img src="images/health 2.png" alt="Health monitoring analytics view" />
-              </div>
-            </div>
-          </div>
-          <div class="chip-row">
-            <span>Health</span><span>Dashboard</span><span>Monitoring</span><span>UI</span>
-          </div>
-        </article>
-        <article class="project card professional-card">
-          <h3>Stravo Mens Apparel — E-commerce for Men's Fashion</h3>
-          <p>
-            Stravo Mens Apparel is an e-commerce prototype built to showcase a masculine fashion brand online.
-            It includes a polished product catalog, category filtering, and a responsive shopping experience that
-            works smoothly on both phones and desktops.
-          </p>
-          <p>
-            Customers can browse collections, view detailed product pages, and add items to a streamlined cart.
-            The checkout flow is kept simple to support easy order completion while still offering the structure
-            needed for a professional online store.
-          </p>
-          <p>
-            The project focuses on visual clarity and faster browsing, with easy-to-read product cards and thoughtful
-            layouts. It aims to create a confident shopping experience that helps users find styles quickly and
-            complete purchases without distractions.
-          </p>
-          <div class="project-slider" data-slider>
-            <div class="slider-track">
-              <div class="slide">
-               <img src="images/stravo 1.webp" alt="Stravo home catalog" />
-              </div>
-              <div class="slide">
-               <img src="images/stravo.jpg" alt="Stravo product page" />
-              </div>
-              <div class="slide">
-               <img src="images/stravo 2.jpg" alt="Stravo cart checkout" />
-              </div>
-            </div>
-          </div>
-          <div class="chip-row">
-            <span>e-commerce</span><span>UI/UX</span><span>Inventory</span><span>Payments</span>
-          </div>
-        </article>
+            </article>
+
           </div>
         </div>
-        <button class="projects-nav-btn" type="button" data-project-next aria-label="View next project">›</button>
+
+        <button class="carousel-arrow carousel-next" id="project-carousel-next" type="button" aria-label="Next Project" title="Next Project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
-      <div class="projects-dots" data-project-dots></div>
+
+      <!-- Projects Carousel Bottom Controls -->
+      <div class="carousel-controls-bottom">
+        <div class="carousel-dots" id="project-carousel-dots"></div>
+        
     </section>
 
+    <!-- SKILLS SECTION -->
     <section class="section reveal" id="skills">
       <div class="section-head">
-        <p class="eyebrow">Skills</p>
-        <h2>Core, technical, and collaboration skills.</h2>
-      </div>
-      <div class="skill-board">
-        <article class="skill-group card professional-card">
-          <h3>Core Skills</h3>
-          <ul>
-            <li>Coding</li>
-            <li>Web Design</li>
-          </ul>
-        </article>
-        <article class="skill-group card professional-card">
-          <h3>Personal Skills</h3>
-          <ul>
-            <li>Strong Communication</li>
-            <li>Team Collaboration</li>
-          </ul>
-        </article>
-        <article class="skill-group card professional-card">
-          <h3>Technical Skills</h3>
-          <ul>
-            <li>Python, Java, C#, MySQL</li>
-            <li>HTML, CSS, JavaScript</li>
-          </ul>
-        </article>
-        <article class="skill-group card professional-card">
-          <h3>Tools and Software</h3>
-          <ul>
-            <li>VS Code</li>
-            <li>XAMPP</li>
-            <li>Android Studio</li>
-            <li>Canva</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="section reveal" id="education">
-      <div class="section-head">
-        <p class="eyebrow">Education</p>
-        <h2>My educational background.</h2>
-      </div>
-      <div class="timeline">
-        <article class="timeline-item card professional-card">
-          <h3>ACTS COMPUTER COLLEGE</h3>
-          <p>Sta. Cruz, Laguna</p>
-          <p>Senior High School - ICT</p>
-          <p>Graduated: 2023</p>
-        </article>
-        <article class="timeline-item card professional-card">
-          <h3>GOV. FELICISIMO T. SAN LUIS INTEGRATED SENIOR HIGH SCHOOL</h3>
-          <p>Sta. Cruz, Laguna</p>
-          <p>Junior High School</p>
-          <p>Graduated: 2021</p>
-        </article>
-        <article class="timeline-item card professional-card">
-          <h3>SAN JOSE ELEMENTARY SCHOOL</h3>
-          <p>Graduated: 2017</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section reveal" id="certifications">
-      <div class="section-head">
-        <p class="eyebrow">Certifications</p>
-        <h2>Verified training and digital badges.</h2>
+        <span class="eyebrow">Technical Competencies</span>
+        <h2>Skills, tools, and technical toolkit.</h2>
+        <p class="section-desc">
+          Proficiencies developed through academic degree coursework, independent projects, and certified industry training.
+        </p>
       </div>
 
-      <article class="card professional-card badge-card cert-credly-card">
-        <div>
-          <span class="cert-tag">Verified credentials</span>
-          <p class="eyebrow">Credly Profile</p>
-          <h3>Badge Verification Link</h3>
-          <p>Open my Credly profile to view verified badges and certification history.</p>
-        </div>
-        <a class="btn btn-primary" href="https://www.credly.com/users/surbano-arianna-c" target="_blank" rel="noopener noreferrer">
-          Open Credly Profile
-        </a>
-      </article>
-
-      <div class="cert-carousel-shell">
-        <button class="cert-nav-btn" type="button" data-cert-prev aria-label="View previous certifications">‹</button>
-
-        <div class="cert-carousel" data-cert-carousel>
-          <div class="cert-track">
-            <div class="cert-slide">
-              <article class="card professional-card cert-card single-cert-card">
-                <div class="cert-meta"><span class="cert-tag">Cloud</span></div>
-                <a href="certs/Screenshot_2026-08-05-18-05-56-18_a27b88515698e5a58d06d430da63049d.jpg" target="_blank" rel="noopener noreferrer">
-                  <img class="cert-image" src="certs/Screenshot_2026-08-05-18-05-56-18_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Cloud Practitioner Essentials certificate" />
-                </a>
-                <h3>AWS Cloud Practitioner Essentials</h3>
-                <p>Completed March 03, 2026</p>
-              </article>
+      <div class="skills-container">
+        <!-- Group 1: Backend & Languages -->
+        <div class="skill-category-card glass-card" data-skill-group="backend">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+              </svg>
             </div>
-
-            <div class="cert-slide">
-              <article class="card professional-card cert-card single-cert-card">
-                <div class="cert-meta"><span class="cert-tag">Business</span></div>
-                <a href="certs/Screenshot_2026-08-05-18-06-32-88_a27b88515698e5a58d06d430da63049d.jpg" target="_blank" rel="noopener noreferrer">
-                  <img class="cert-image" src="certs/Screenshot_2026-08-05-18-06-32-88_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Cloud Essentials for Business Leaders certificate" />
-                </a>
-                <h3>AWS Cloud Essentials for Business Leaders</h3>
-                <p>Completed March 06, 2026</p>
-              </article>
+            <div>
+              <h3>Backend &amp; Databases</h3>
+              <p>Core programming, business logic &amp; data persistence</p>
             </div>
-
-            <div class="cert-slide">
-              <article class="card professional-card cert-card single-cert-card">
-                <div class="cert-meta"><span class="cert-tag">AI</span></div>
-                <a href="certs/Screenshot_2026-08-05-18-07-12-77_a27b88515698e5a58d06d430da63049d.jpg" target="_blank" rel="noopener noreferrer">
-                  <img class="cert-image" src="certs/Screenshot_2026-08-05-18-07-12-77_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Cloud Quest Generative AI Practitioner certificate" />
-                </a>
-                <h3>AWS Cloud Quest: Generative AI Practitioner</h3>
-                <p>Completed April 02, 2026</p>
-              </article>
+          </div>
+          <div class="skill-items-grid">
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Python</span>
+                <span class="skill-badge-level">Proficient</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 85%;"></div></div>
             </div>
-
-            <div class="cert-slide">
-              <article class="card professional-card cert-card single-cert-card">
-                <div class="cert-meta"><span class="cert-tag">Cybersecurity</span></div>
-                <a href="certs/34_20260206_104825_0033.png" target="_blank" rel="noopener noreferrer">
-                  <img class="cert-image" src="certs/34_20260206_104825_0033.png" alt="Certificate of participation for navigating digital risk" />
-                </a>
-                <h3>Certificate of Participation</h3>
-                <p>Navigating Digital Risk webinar, January 31, 2026</p>
-              </article>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">MySQL / SQL</span>
+                <span class="skill-badge-level">Proficient</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 82%;"></div></div>
             </div>
-
-            <div class="cert-slide">
-              <article class="card professional-card cert-card single-cert-card">
-                <div class="cert-meta"><span class="cert-tag">Design</span></div>
-                <a href="certs/Screenshot_2026-08-03-21-34-00-56_99c04817c0de5652397fc8b56c3b3817.jpg" target="_blank" rel="noopener noreferrer">
-                  <img class="cert-image" src="certs/Screenshot_2026-08-03-21-34-00-56_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Certificate of participation for Intro to Canva and Scam Awareness" />
-                </a>
-                <h3>Certificate of Participation</h3>
-                <p>Intro to Canva &amp; Scam Awareness, February 06, 2026</p>
-              </article>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Java</span>
+                <span class="skill-badge-level">Intermediate</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 75%;"></div></div>
             </div>
-
-            <div class="cert-slide">
-              <article class="card professional-card cert-card single-cert-card">
-                <div class="cert-meta"><span class="cert-tag">Machine learning</span></div>
-                <a href="certs/Screenshot_2026-08-05-18-07-48-77_a27b88515698e5a58d06d430da63049d.jpg" target="_blank" rel="noopener noreferrer">
-                  <img class="cert-image" src="certs/Screenshot_2026-08-05-18-07-48-77_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Fundamentals of Machine Learning and Artificial Intelligence certificate" />
-                </a>
-                <h3>Fundamentals of Machine Learning and Artificial Intelligence</h3>
-                <p>Completed April 29, 2026</p>
-              </article>
-            </div>
-
-            <div class="cert-slide">
-              <article class="card professional-card cert-card single-cert-card">
-                <div class="cert-meta"><span class="cert-tag">Azure</span></div>
-                <a href="certs/592c2872-10c6-4bb5-8129-e1d23bbbad93 (1).png" target="_blank" rel="noopener noreferrer">
-                  <img class="cert-image" src="certs/592c2872-10c6-4bb5-8129-e1d23bbbad93 (1).png" alt="Certificate of Attendance — Introduction to AI in Azure" />
-                </a>
-                <h3>Certificate of Attendance — Introduction to AI in Azure</h3>
-                <p>BlackStride Cyber Webinar — Completed August 14, 2026</p>
-              </article>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">C# (.NET)</span>
+                <span class="skill-badge-level">Intermediate</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 70%;"></div></div>
             </div>
           </div>
         </div>
 
-        <button class="cert-nav-btn" type="button" data-cert-next aria-label="View next certifications">›</button>
-      </div>
+        <!-- Group 2: Frontend & Web -->
+        <div class="skill-category-card glass-card" data-skill-group="frontend">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h3>Frontend &amp; Web Design</h3>
+              <p>User interfaces, responsive layouts &amp; styling</p>
+            </div>
+          </div>
+          <div class="skill-items-grid">
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">HTML5</span>
+                <span class="skill-badge-level">Advanced</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 90%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">CSS3 / Flex &amp; Grid</span>
+                <span class="skill-badge-level">Proficient</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 88%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">JavaScript (ES6+)</span>
+                <span class="skill-badge-level">Intermediate</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 78%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Responsive Design</span>
+                <span class="skill-badge-level">Proficient</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 85%;"></div></div>
+            </div>
+          </div>
+        </div>
 
-      <div class="cert-dots" data-cert-dots></div>
+        <!-- Group 3: Tools & Software -->
+        <div class="skill-category-card glass-card" data-skill-group="tools">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div>
+              <h3>Tools &amp; Development Environments</h3>
+              <p>IDEs, local servers, and productivity software</p>
+            </div>
+          </div>
+          <div class="skill-items-grid">
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">VS Code</span>
+                <span class="skill-badge-level">Primary Editor</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 92%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">XAMPP (Apache / MariaDB)</span>
+                <span class="skill-badge-level">Proficient</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 85%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Git &amp; GitHub</span>
+                <span class="skill-badge-level">Intermediate</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 78%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Android Studio &amp; Canva</span>
+                <span class="skill-badge-level">Familiar</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 75%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 4: Professional & Soft Skills -->
+        <div class="skill-category-card glass-card" data-skill-group="soft">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div>
+              <h3>Professional Strengths</h3>
+              <p>Team dynamics, problem solving &amp; mindset</p>
+            </div>
+          </div>
+          <div class="skill-items-grid">
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Clear Technical Communication</span>
+                <span class="skill-badge-level">Strong</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 90%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Team Collaboration &amp; Support</span>
+                <span class="skill-badge-level">Strong</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 92%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Analytical Debugging &amp; Logic</span>
+                <span class="skill-badge-level">Strong</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 88%;"></div></div>
+            </div>
+            <div class="skill-badge-item">
+              <div class="skill-badge-top">
+                <span class="skill-badge-name">Continuous Self-Learning</span>
+                <span class="skill-badge-level">Dedicated</span>
+              </div>
+              <div class="skill-progress"><div class="skill-progress-bar" style="--skill-pct: 95%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <section class="section reveal" id="contact">
-      <div class="contact-shell card professional-card">
-        <div>
-          <p class="eyebrow">Contact Me</p>
-          <h2>Open to internships and entry-level IT opportunities.</h2>
-          <p>Let's collaborate on useful systems and meaningful projects.</p>
-          <ul class="contact-list">
-            <li>Location: Laguna, Philippines</li>
-            <li>Phone: <a href="tel:+639636518437">09636518437</a></li>
-            <li>Email: <a href="mailto:ariannasurbano64@gmail.com">ariannasurbano64@gmail.com</a></li>
-            <li>GitHub: <a href="https://github.com/ariannasurbano" target="_blank" rel="noopener noreferrer">github.com/ariannasurbano</a></li>
-            <li>Facebook: <a href="https://www.facebook.com/share/1FRvWGvq58/" target="_blank" rel="noopener noreferrer">facebook.com/share/1FRvWGvq58</a></li>
-          </ul>
+    <!-- EDUCATION SECTION -->
+    <section class="section reveal" id="education">
+      <div class="section-head">
+        <span class="eyebrow">Academic Journey</span>
+        <h2>My educational background &amp; milestones.</h2>
+        <p class="section-desc">
+          Building strong fundamentals from ICT specialization in high school to tertiary Information Technology studies.
+        </p>
+      </div>
+
+      <div class="timeline-container">
+        <!-- Milestone 1: College (Present) -->
+        <div class="timeline-entry">
+          <div class="timeline-marker">
+            <span class="marker-dot active-dot"></span>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-badge current">Current Degree Candidate</div>
+            <h3 class="timeline-school">LAGUNA STATE POLYTECHNIC UNIVERSITY</h3>
+            <p class="timeline-meta">Sta. Cruz Main Campus • Laguna, Philippines</p>
+            <div class="timeline-degree">Bachelor of Science in Information Technology (BSIT)</div>
+            <p class="timeline-desc">
+              Currently advancing knowledge in database management systems, backend programming, software engineering,
+              networking protocols, and IT system analysis. Active participant in coding laboratories and practical projects.
+            </p>
+            <div class="timeline-tags">
+              <span>Information Technology</span>
+              <span>Backend &amp; Databases</span>
+              <span>Systems Design</span>
+            </div>
+          </div>
         </div>
-        <div class="contact-note">
-          <h3>Preferred Roles</h3>
-          <p>Junior developer, IT support, web assistant, or internship opportunities.</p>
+
+        <!-- Milestone 2: Senior High School -->
+        <div class="timeline-entry">
+          <div class="timeline-marker">
+            <span class="marker-dot"></span>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-badge">Graduated 2023</div>
+            <h3 class="timeline-school">ACTS COMPUTER COLLEGE</h3>
+            <p class="timeline-meta">Sta. Cruz, Laguna</p>
+            <div class="timeline-degree">Senior High School — ICT Strand (Information &amp; Communications Technology)</div>
+            <p class="timeline-desc">
+              Specialized in computer systems, early web programming, algorithm foundations, and hardware maintenance.
+              Graduated with honors in ICT technical skills.
+            </p>
+            <div class="timeline-tags">
+              <span>ICT Strand</span>
+              <span>Foundational Programming</span>
+              <span>Computer Hardware</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milestone 3: Junior High School -->
+        <div class="timeline-entry">
+          <div class="timeline-marker">
+            <span class="marker-dot"></span>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-badge">Graduated 2021</div>
+            <h3 class="timeline-school">GOV. FELICISIMO T. SAN LUIS INTEGRATED SENIOR HIGH SCHOOL</h3>
+            <p class="timeline-meta">Sta. Cruz, Laguna</p>
+            <div class="timeline-degree">Junior High School Diploma</div>
+            <p class="timeline-desc">
+              Completed junior high school education with strong marks in mathematics, science, and computer literacy.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 4: Elementary -->
+        <div class="timeline-entry">
+          <div class="timeline-marker">
+            <span class="marker-dot"></span>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-badge">Graduated 2017</div>
+            <h3 class="timeline-school">SAN JOSE ELEMENTARY SCHOOL</h3>
+            <p class="timeline-meta">Sta. Cruz, Laguna</p>
+            <div class="timeline-degree">Primary School Graduate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <section class="section reveal" id="certifications">
+      <div class="section-head">
+        <span class="eyebrow">Industry Recognition</span>
+        <h2>Verified training, certifications &amp; digital badges.</h2>
+        <p class="section-desc">
+          Official AWS credentials, cloud computing essentials, artificial intelligence badges, and cybersecurity training.
+        </p>
+      </div>
+
+      <!-- Credly Banner Callout -->
+      <div class="credly-banner glass-card">
+        <div class="credly-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="32" height="32">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+          </svg>
+        </div>
+        <div class="credly-info">
+          <div class="credly-tag">OFFICIAL CREDENTIAL VERIFICATION</div>
+          <h3 class="credly-title">Verified Credly Profile &amp; Digital Badges</h3>
+          <p class="credly-desc">
+            All AWS and cloud credentials are authenticated on Credly. View official cryptographic verification badges, issue dates, and skills assessment.
+          </p>
+        </div>
+        <a href="https://www.credly.com/users/surbano-arianna-c" target="_blank" rel="noopener noreferrer" class="btn btn-primary credly-btn">
+          <span>Open Credly Profile</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Certifications Carousel Wrapper -->
+      <div class="carousel-wrapper certs-carousel-wrapper">
+        <button class="carousel-arrow carousel-prev" id="cert-carousel-prev" type="button" aria-label="Previous Certificate" title="Previous Certificate">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="carousel-viewport" id="cert-carousel-viewport">
+          <div class="carousel-track certs-track" id="cert-carousel-track">
+
+            <!-- CERT 1: AWS Cloud Practitioner Essentials -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/Screenshot_2026-08-05-18-05-56-18_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Cloud Practitioner Essentials Certificate" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/Screenshot_2026-08-05-18-05-56-18_a27b88515698e5a58d06d430da63049d.jpg" data-title="AWS Cloud Practitioner Essentials" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag cloud">AWS Cloud</span>
+                <h3 class="cert-name">AWS Cloud Practitioner Essentials</h3>
+                <p class="cert-date">Completed March 03, 2026</p>
+                <p class="cert-summary">Fundamental concepts of Amazon Web Services (AWS) cloud architecture, security, compute, database services, and cost models.</p>
+              </div>
+            </article>
+
+            <!-- CERT 2: AWS Cloud Essentials for Business Leaders -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/Screenshot_2026-08-05-18-06-32-88_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Cloud Essentials for Business Leaders Certificate" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/Screenshot_2026-08-05-18-06-32-88_a27b88515698e5a58d06d430da63049d.jpg" data-title="AWS Cloud Essentials for Business Leaders" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag business">Cloud &amp; Strategy</span>
+                <h3 class="cert-name">AWS Cloud Essentials for Business Leaders</h3>
+                <p class="cert-date">Completed March 06, 2026</p>
+                <p class="cert-summary">Strategic value of cloud transformation, security alignment, cloud economics, and modernizing IT infrastructure.</p>
+              </div>
+            </article>
+
+            <!-- CERT 3: AWS Cloud Quest Generative AI -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/Screenshot_2026-08-05-18-07-12-77_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Cloud Quest Generative AI Practitioner Certificate" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/Screenshot_2026-08-05-18-07-12-77_a27b88515698e5a58d06d430da63049d.jpg" data-title="AWS Cloud Quest: Generative AI Practitioner" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag ai">Generative AI</span>
+                <h3 class="cert-name">AWS Cloud Quest: Generative AI Practitioner</h3>
+                <p class="cert-date">Completed April 02, 2026</p>
+                <p class="cert-summary">Hands-on practical quest in developing, deploying, and prompting with Foundation Models (LLMs) on Amazon Bedrock.</p>
+              </div>
+            </article>
+
+            <!-- CERT 4: AWS Fundamentals of ML & AI -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/Screenshot_2026-08-05-18-07-48-77_a27b88515698e5a58d06d430da63049d.jpg" alt="AWS Fundamentals of Machine Learning and AI Certificate" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/Screenshot_2026-08-05-18-07-48-77_a27b88515698e5a58d06d430da63049d.jpg" data-title="AWS Fundamentals of Machine Learning & AI" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag ai">Machine Learning</span>
+                <h3 class="cert-name">Fundamentals of Machine Learning and AI</h3>
+                <p class="cert-date">Completed April 29, 2026</p>
+                <p class="cert-summary">Core ML workflows, model training parameters, dataset preparation, and implementing AI algorithms in practical software.</p>
+              </div>
+            </article>
+
+            <!-- CERT 5: Azure AI Webinar -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/592c2872-10c6-4bb5-8129-e1d23bbbad93 (1).png" alt="BlackStride Cyber - Intro to AI in Azure" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/592c2872-10c6-4bb5-8129-e1d23bbbad93 (1).png" data-title="Certificate of Attendance — Introduction to AI in Azure" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag azure">Azure &amp; AI</span>
+                <h3 class="cert-name">Certificate of Attendance: Intro to AI in Azure</h3>
+                <p class="cert-date">BlackStride Cyber • August 14, 2026</p>
+                <p class="cert-summary">Webinar training on Microsoft Azure AI Cognitive Services, machine learning endpoints, and cloud security.</p>
+              </div>
+            </article>
+
+            <!-- CERT 6: Navigating Digital Risk -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/34_20260206_104825_0033.png" alt="Navigating Digital Risk Certificate" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/34_20260206_104825_0033.png" data-title="Navigating Digital Risk Certificate" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag security">Cybersecurity</span>
+                <h3 class="cert-name">Navigating Digital Risk — Certificate of Participation</h3>
+                <p class="cert-date">Completed January 31, 2026</p>
+                <p class="cert-summary">Webinar focusing on identifying cybersecurity vulnerabilities, threat mitigation, phishing awareness, and data hygiene.</p>
+              </div>
+            </article>
+
+            <!-- CERT 7: Canva & Scam Awareness -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/Screenshot_2026-08-03-21-34-00-56_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Intro to Canva & Scam Awareness Certificate" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/Screenshot_2026-08-03-21-34-00-56_99c04817c0de5652397fc8b56c3b3817.jpg" data-title="Intro to Canva & Scam Awareness" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag design">Design &amp; Security</span>
+                <h3 class="cert-name">Intro to Canva &amp; Scam Awareness</h3>
+                <p class="cert-date">Completed February 06, 2026</p>
+                <p class="cert-summary">Visual communication, graphic design workflows in Canva, combined with digital security and social engineering awareness.</p>
+              </div>
+            </article>
+
+            <!-- CERT 8: BlackStride Cyber - Securing AI 101 -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/ai.png" alt="BlackStride Cyber Certificate of Attendance — Securing AI 101" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/ai.png" data-title="Certificate of Attendance — Securing AI 101" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag security">AI Security</span>
+                <h3 class="cert-name">Certificate of Attendance — Securing AI 101</h3>
+                <p class="cert-date">Completed August 28, 2026</p>
+                <p class="cert-summary">Webinar on foundational AI security concepts, safe deployment practices, and responsible learning in modern AI systems.</p>
+              </div>
+            </article>
+
+            <!-- CERT 9: Ask Lex PH Academy - Data Analysis Webinar -->
+            <article class="glass-card cert-carousel-card">
+              <div class="cert-image-frame">
+                <img src="certs/data.jpg" alt="Ask Lex PH Academy Certificate of Participation — Think Like a Data Analyst" loading="lazy" />
+                <button class="cert-preview-trigger" type="button" data-lightbox="certs/data.jpg" data-title="Certificate of Participation — Think Like a Data Analyst" title="Click to view full certificate">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>View Full Certificate</span>
+                </button>
+              </div>
+              <div class="cert-content">
+                <span class="cert-tag ai">Data Analytics</span>
+                <h3 class="cert-name">Think Like a Data Analyst: From Data to Insight</h3>
+                <p class="cert-date">Completed September 11, 2026</p>
+                <p class="cert-summary">Participation in a data analysis webinar focused on reasoning from raw data, extracting insights, and using evidence-based approaches.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <button class="carousel-arrow carousel-next" id="cert-carousel-next" type="button" aria-label="Next Certificate" title="Next Certificate">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Certifications Carousel Bottom Controls -->
+      <div class="carousel-controls-bottom">
+        <div class="carousel-dots" id="cert-carousel-dots"></div>
+       
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section reveal" id="contact">
+      <div class="section-head">
+        <span class="eyebrow">Let's Connect</span>
+        <h2>Get in touch for internships &amp; IT opportunities.</h2>
+        <p class="section-desc">
+          Have an internship vacancy, junior developer role, or student project collaboration in mind? I'd love to hear from you.
+        </p>
+      </div>
+
+      <div class="contact-wrapper">
+        <!-- Contact Info & Quick Copy Cards -->
+        <div class="contact-info-panel">
+          <div class="glass-card contact-card">
+            <h3>Contact Channels</h3>
+            <p class="contact-intro">Feel free to reach out directly via email, mobile, or connect through social channels.</p>
+
+            <!-- Interactive Email Card with Copy Button -->
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="contact-text">
+                <span class="contact-label">Email Address</span>
+                <a href="mailto:ariannasurbano64@gmail.com" class="contact-link" id="email-val">ariannasurbano64@gmail.com</a>
+              </div>
+              <button class="btn-copy" type="button" data-copy="ariannasurbano64@gmail.com" aria-label="Copy email address" title="Copy email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Interactive Phone Card with Copy Button -->
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <div class="contact-text">
+                <span class="contact-label">Mobile Phone</span>
+                <a href="tel:+639636518437" class="contact-link" id="phone-val">09636518437 (+63 963 651 8437)</a>
+              </div>
+              <button class="btn-copy" type="button" data-copy="09636518437" aria-label="Copy phone number" title="Copy phone">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Location Item -->
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="contact-text">
+                <span class="contact-label">Location</span>
+                <span class="contact-link-static">Sta. Cruz, Laguna, Philippines (Available for On-site &amp; Remote)</span>
+              </div>
+            </div>
+
+            <!-- Social Links Grid -->
+            <div class="social-links-grid">
+              <a href="https://github.com/ariannasurbano" target="_blank" rel="noopener noreferrer" class="social-chip-card">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>GitHub Profile</span>
+              </a>
+              <a href="https://www.facebook.com/share/1FRvWGvq58/" target="_blank" rel="noopener noreferrer" class="social-chip-card">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.779 0-1.84.247-2.13.79-.17.319-.244.821-.244 1.698v1.492h4.516l-.582 3.667h-3.934v7.98h-4.744z"/>
+                </svg>
+                <span>Facebook</span>
+              </a>
+              <a href="https://www.credly.com/users/surbano-arianna-c" target="_blank" rel="noopener noreferrer" class="social-chip-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+                <span>Credly Badges</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Direct Message Form -->
+        <div class="contact-form-panel">
+          <div class="glass-card contact-form-card">
+            <h3>Send a Direct Message</h3>
+            <p class="contact-form-sub">Looking forward to hearing about your opportunities, internships, or feedback.</p>
+
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name">Your Name <span class="required">*</span></label>
+                  <input type="text" id="contact-name" name="name" placeholder="e.g. Juan Dela Cruz" required />
+                  <span class="form-error" id="name-error">Please enter your name.</span>
+                </div>
+                <div class="form-group">
+                  <label for="contact-email">Your Email <span class="required">*</span></label>
+                  <input type="email" id="contact-email" name="email" placeholder="name@company.com" required />
+                  <span class="form-error" id="email-error">Please enter a valid email address.</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject">Subject</label>
+                <input type="text" id="contact-subject" name="subject" placeholder="Internship Opportunity / Project Inquiry" />
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message">Message <span class="required">*</span></label>
+                <textarea id="contact-message" name="message" rows="4" placeholder="Hello Arianna, we came across your portfolio and would love to discuss..." required></textarea>
+                <div class="char-count-wrap">
+                  <span class="form-error" id="message-error">Please enter a brief message.</span>
+                  <span id="char-counter" class="char-counter">0 / 500</span>
+                </div>
+              </div>
+
+              <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+                <span>Send Message</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
-    <p>© <span id="year"></span> Arianna C. Surbano // Built for first opportunities in IT.</p>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="Logo" class="footer-logo" />
+          <span class="footer-brand-title">Arianna C. Surbano</span>
+          <p class="footer-tagline">BSIT Student at Laguna State Polytechnic University. Dedicated to creating reliable software and backend systems.</p>
+        </div>
+        
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="year">2026</span> Arianna C. Surbano. Designed &amp; built for first opportunities in IT.</p>
+        <p class="footer-location">Sta. Cruz, Laguna, Philippines</p>
+      </div>
+    </div>
   </footer>
+
+  <!-- FULLSCREEN LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Media Preview">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-shell">
+      <div class="lightbox-header">
+        <span id="lightbox-title" class="lightbox-title">Image Preview</span>
+        <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close preview">✕</button>
+      </div>
+      <div class="lightbox-body">
+        <button id="lightbox-prev" class="lightbox-arrow lightbox-prev" type="button" aria-label="Previous image">‹</button>
+        <div class="lightbox-img-wrapper">
+          <img id="lightbox-img" src="" alt="Full view preview" />
+        </div>
+        <button id="lightbox-next" class="lightbox-arrow lightbox-next" type="button" aria-label="Next image">›</button>
+      </div>
+      <div class="lightbox-footer">
+        <span id="lightbox-counter" class="lightbox-counter">1 of 1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK RESUME / PROFILE MODAL -->
+  <div id="resume-modal" class="resume-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Arianna C. Surbano Profile Summary">
+    <div class="resume-backdrop"></div>
+    <div class="resume-shell">
+      <div class="resume-header">
+        <div>
+          <h2>Arianna C. Surbano</h2>
+          <p>Candidate for Bachelor of Science in Information Technology (BSIT)</p>
+        </div>
+        <button id="resume-close" class="resume-close" type="button" aria-label="Close resume summary">✕</button>
+      </div>
+      <div class="resume-body">
+        <div class="resume-section">
+          <h3>Professional Objective</h3>
+          <p>
+            Motivated and detail-oriented Information Technology student seeking an internship or entry-level IT/backend developer role.
+            Eager to contribute strong competencies in Python, MySQL, database design, and software problem-solving while learning from experienced engineering mentors.
+          </p>
+        </div>
+
+        <div class="resume-section">
+          <h3>Education</h3>
+          <p><strong>Laguna State Polytechnic University (LSPU)</strong> — Sta. Cruz, Laguna</p>
+          <p>Bachelor of Science in Information Technology | Senior Student</p>
+          <p style="margin-top:8px;"><strong>ACTS Computer College</strong> — Sta. Cruz, Laguna</p>
+          <p>Senior High School — ICT Strand | Graduated 2023 with Honors</p>
+        </div>
+
+        <div class="resume-section">
+          <h3>Key Projects</h3>
+          <ul>
+            <li><strong>Corner 22's Billing &amp; POS:</strong> Python &amp; database billing system with GCash integration and instant receipt calculation.</li>
+            <li><strong>Happy Net Cafe Station Monitor:</strong> Workstation time-tracking, billing calculator, and dashboard for cyber cafe shops.</li>
+            <li><strong>Recipe App (LutoLoco):</strong> Searchable multi-category recipe catalog with preparation guides and favorites.</li>
+            <li><strong>Stravo Mens Apparel:</strong> E-commerce prototype with responsive cart state and catalog navigation.</li>
+          </ul>
+        </div>
+
+        <div class="resume-section">
+          <h3>Certifications</h3>
+          <ul>
+            <li>AWS Cloud Practitioner Essentials (March 2026)</li>
+            <li>AWS Cloud Essentials for Business Leaders (March 2026)</li>
+            <li>AWS Cloud Quest: Generative AI Practitioner (April 2026)</li>
+            <li>AWS Fundamentals of Machine Learning &amp; AI (April 2026)</li>
+            <li>BlackStride Cyber: Introduction to AI in Azure (August 2026)</li>
+          </ul>
+        </div>
+
+        <div class="resume-section">
+          <h3>Contact Details</h3>
+          <p>Phone: 09636518437 | Email: ariannasurbano64@gmail.com</p>
+          <p>GitHub: github.com/ariannasurbano | Sta. Cruz, Laguna, Philippines</p>
+        </div>
+      </div>
+      <div class="resume-footer">
+        <button id="resume-print-btn" class="btn btn-primary" type="button">Print / Save as PDF</button>
+        <button id="resume-dismiss-btn" class="btn btn-secondary" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- FLOATING SCROLL TO TOP BUTTON -->
+  <button id="scroll-to-top" class="scroll-to-top" type="button" aria-label="Scroll back to top">
+    <svg class="progress-ring" width="48" height="48">
+      <circle class="progress-ring-bg" cx="24" cy="24" r="20" stroke-width="3" fill="none"></circle>
+      <circle class="progress-ring-circle" id="scroll-circle" cx="24" cy="24" r="20" stroke-width="3" fill="none"></circle>
+    </svg>
+    <svg class="top-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m18 15-6-6-6 6"></path>
+    </svg>
+  </button>
 
   <script src="script.js"></script>
 </body>
