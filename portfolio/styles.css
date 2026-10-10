@@ -1359,48 +1359,16 @@ main, .site-footer {
   border-radius: var(--radius-md);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: transform 0.4s ease;
+  cursor: zoom-in;
+}
+
+.slide img:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .project-carousel-card:hover .slide img {
   transform: scale(1.02);
-}
-
-/* Slider Internal Controls */
-.slider-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-pill);
-  background: rgba(15, 6, 20, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-size: 1.3rem;
-  line-height: 1;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  transition: all var(--transition-fast);
-  z-index: 5;
-}
-
-.slider-prev { left: 14px; }
-.slider-next { right: 14px; }
-
-.project-media-shell:hover .slider-nav {
-  opacity: 1;
-}
-
-.project-media-shell:focus-within .slider-nav {
-  opacity: 1;
-}
-
-.slider-nav:hover {
-  background: var(--accent);
-  transform: translateY(-50%) scale(1.1);
 }
 
 .slider-dots {
@@ -1426,39 +1394,6 @@ main, .site-footer {
 .slider-dots button.active {
   width: 22px;
   background: var(--accent);
-}
-
-.zoom-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--radius-pill);
-  background: rgba(18, 7, 24, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-size: 0.78rem;
-  font-weight: 600;
-  backdrop-filter: blur(10px);
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(-6px);
-  transition: all var(--transition-fast);
-  z-index: 6;
-}
-
-.project-media-shell:hover .zoom-btn {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.zoom-btn:hover {
-  background: var(--accent-gradient);
-  border-color: transparent;
-  transform: translateY(0) scale(1.05);
 }
 
 .project-body {
@@ -1591,12 +1526,6 @@ main, .site-footer {
   .slide {
     min-height: 220px;
     padding: 0.75rem;
-  }
-}
-
-@media (hover: none), (pointer: coarse) {
-  .slider-nav {
-    opacity: 1;
   }
 }
 
@@ -2043,11 +1972,20 @@ main, .site-footer {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   gap: 2rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.contact-info-panel,
+.contact-form-panel {
+  display: flex;
 }
 
 .contact-card, .contact-form-card {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 .contact-intro, .contact-form-sub {
@@ -2118,6 +2056,43 @@ main, .site-footer {
   font-size: 0.9rem;
   color: var(--ink);
   line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .contact-card,
+  .contact-form-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-wrapper {
+    gap: 1rem;
+  }
+
+  .contact-item {
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.8rem;
+  }
+
+  .contact-link,
+  .contact-link-static {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: break-word;
+  }
+
+  .social-links-grid,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .btn-copy {
@@ -2255,6 +2230,12 @@ main, .site-footer {
   font-size: 0.76rem;
   color: var(--muted);
   margin-left: auto;
+}
+
+.contact-form-status {
+  min-height: 1.25rem;
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 /* ==========================================================================
@@ -2536,6 +2517,22 @@ main, .site-footer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.resume-identity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.resume-photo {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 35%;
+  border: 2px solid var(--accent);
 }
 
 .resume-header h2 {
@@ -3280,28 +3277,152 @@ main, .site-footer {
   }
 }
 
-/* Print Styles for Resume */
+/* Print only the resume and keep the complete summary on one page. */
+@page {
+  size: letter portrait;
+  margin: 0;
+}
+
 @media print {
-  body {
+  html, body {
+    width: 100%;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: #ffffff !important;
-    color: #000000 !important;
+    color: #111111 !important;
   }
-  
-  .ambient-canvas, .background-mesh, .site-header, .site-footer, .scroll-to-top, .toast-container, .hero-actions {
+
+  body > *:not(#resume-modal) {
     display: none !important;
   }
-  
-  .resume-modal {
-    position: static !important;
-    opacity: 1 !important;
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #resume-modal, #resume-modal * {
     visibility: visible !important;
   }
-  
-  .resume-shell {
-    box-shadow: none !important;
-    border: none !important;
+
+  #resume-modal {
+    position: static !important;
+    display: block !important;
     width: 100% !important;
+    height: auto !important;
+    opacity: 1 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+  }
+
+  .resume-backdrop,
+  .resume-close,
+  .resume-footer {
+    display: none !important;
+  }
+
+  .resume-shell {
+    position: static !important;
+    box-sizing: border-box;
+    width: 100% !important;
+    height: auto !important;
     max-height: none !important;
+    margin: 0 !important;
+    padding: 0.35in !important;
+    overflow: visible !important;
+    transform: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .resume-header {
+    align-items: center;
+    gap: 0.18in;
+    padding: 0 0 0.12in;
+    border-bottom: 1px solid #777777;
+  }
+
+  .resume-identity {
+    gap: 0.16in;
+  }
+
+  .resume-photo {
+    width: 0.86in;
+    height: 0.86in;
+    flex-basis: 0.86in;
+    border: 1.5px solid #333333;
+  }
+
+  .resume-header h2 {
+    margin: 0 0 0.04in;
+    color: #111111 !important;
+    font-size: 20pt;
+    line-height: 1.1;
+  }
+
+  .resume-header p {
+    color: #333333 !important;
+    font-size: 9pt;
+  }
+
+  .resume-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+    gap: 0.12in 0.24in;
+    padding: 0.14in 0 0;
+    overflow: visible !important;
+  }
+
+  .resume-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-section:first-child,
+  .resume-section:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .resume-section h3 {
+    margin: 0 0 0.04in;
+    padding-bottom: 0.025in;
+    color: #111111 !important;
+    border-color: #999999;
+    font-size: 10pt;
+    line-height: 1.15;
+  }
+
+  .resume-section p,
+  .resume-section li {
+    color: #222222 !important;
+    font-size: 8pt;
+    line-height: 1.28;
+  }
+
+  .resume-section ul {
+    gap: 0.025in;
+    padding-left: 0.18in;
+  }
+
+  .resume-section p + p {
+    margin-top: 0.025in;
+  }
+
+  a {
+    color: #111111 !important;
+    text-decoration: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
 
