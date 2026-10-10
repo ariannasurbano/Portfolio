@@ -601,13 +601,13 @@ main, .site-footer {
 
 /* Collapsed state for side-nav */
 .site-header.side-nav.side-nav-collapsed {
-  transform: translateY(-50%) translateX(calc(100% + 8px));
-  opacity: 0.25;
+  transform: translateY(-50%) translateX(100%);
 }
 
-.site-header.side-nav.side-nav-collapsed:hover {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
+.site-header.side-nav.side-nav-collapsed .site-nav,
+.site-header.side-nav.side-nav-collapsed .theme-toggle-btn {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .site-header.side-nav.side-nav-collapsed .side-nav-toggle {
@@ -711,6 +711,10 @@ main, .site-footer {
     width: 28px;
     height: 28px;
     right: -12px;
+  }
+
+  .site-header.side-nav.side-nav-collapsed {
+    transform: translateY(-50%) translateX(calc(100% - 4px));
   }
 
   .site-header .theme-toggle-btn,
